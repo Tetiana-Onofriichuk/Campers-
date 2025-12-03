@@ -1,0 +1,120 @@
+.card {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 24px;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid #dadde1;
+  background-color: #ffffff;
+}
+
+.imageWrapper {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--main);
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--main);
+}
+
+.metaRow {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  color: var(--rating);
+}
+
+.reviews {
+  color: var(--gray);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.description {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.4;
+  max-width: 480px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 2 лінії, як на макеті */
+  -webkit-box-orient: vertical;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  padding: 8px 14px;
+  border-radius: 100px;
+  background-color: #f2f4f7;
+  font-size: 12px;
+  color: var(--main);
+}
+
+.footer {
+  margin-top: 8px;
+}
+
+.showMore {
+  display: inline-block;
+  padding: 10px 32px;
+  border-radius: 40px;
+  background-color: var(--button);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.showMore:hover {
+  background-color: var(--button-hover);
+}

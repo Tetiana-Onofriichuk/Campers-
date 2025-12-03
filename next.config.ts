@@ -1,14 +1,17 @@
-// next.config.ts
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // Можна лишити ТІЛЬКИ те, що справді потрібно
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "ftp.goit.study",
+        pathname: "/img/campers-test-task/**",
+      },
+      {
+        protocol: "https",
         hostname: "ac.goit.global",
-        pathname: "/**", // ← обовʼязково, інакше SSR може падати
+        pathname: "/**",
       },
       {
         protocol: "https",
@@ -16,7 +19,6 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
-    // або альтернативно: domains: ['ac.goit.global', 'res.cloudinary.com']
   },
 };
 

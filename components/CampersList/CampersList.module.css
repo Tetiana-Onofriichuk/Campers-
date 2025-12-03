@@ -1,0 +1,59 @@
+/* components/CampersList/CampersList.module.css */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.loader {
+  font-size: 18px;
+  color: var(--gray);
+  padding: 20px;
+}
+
+.empty {
+  font-size: 20px;
+  color: var(--gray);
+  padding: 40px 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.item {
+  list-style: none;
+}
+
+/* Плейсхолдер — прибери, коли зробимо CamperCard */
+.cardPlaceholder {
+  padding: 20px;
+  border: 1px solid #dadde1;
+  border-radius: 12px;
+  background: white;
+}
+
+.loadMore {
+  padding: 12px 40px;
+  border-radius: 40px;
+  border: none;
+  align-self: center;
+  background-color: var(--button);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.loadMore:hover {
+  background-color: var(--button-hover);
+}
+
+.loadMore:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -1,15 +1,46 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
+import type {
+  Camper,
+  CamperFilters,
+  CampersResponse,
+  EquipmentKey,
+} from "@/types/camper";
 
-const isProd = process.env.NODE_ENV === "production";
+const DEFAULT_LIMIT = 4;
 
-export const nextApi = axios.create({
-  baseURL: "/api",
-  withCredentials: true,
-  validateStatus: () => true,
-});
+function buildParams(page: number, limit: number, filters: CamperFilters) {
+  const params: Record<string, any> = { page, limit };
 
-export const backend = axios.create({
-  baseURL: isProd ? process.env.NEXT_PUBLIC_API_URL : "http://localhost:3030",
-  withCredentials: true,
-  validateStatus: () => true,
-});
+  if (filters.location.trim()) {
+    params.location = filters.location.trim();
+  }
+
+  if (filters.form) {
+    params.form = filters.form;
+  }
+
+  filters.equipment.forEach((key: EquipmentKey) => {
+    params[key] = true;
+  });
+
+  return params;
+}
+
+export async function fetchCampers(
+  page: number,
+  limit: number = DEFAULT_LIMIT,
+  filters: CamperFilters
+): Promise<CampersResponse> {
+  const params = buildParams(page, limit, filters);
+
+  const { data } = await axiosInstance.get<CampersResponse>("/campers", {
+    params,
+  });
+
+  return data;
+}
+
+export async function fetchCamperById(id: string): Promise<Camper> {
+  const { data } = await axiosInstance.get<Camper>(`/campers/${id}`);
+  return data;
+}

@@ -1,0 +1,16 @@
+.catalog {
+  padding: 40px 0 80px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 360px 1fr; /* фільтри + список */
+  gap: 24px;
+  align-items: flex-start;
+}
