@@ -31,9 +31,7 @@ export default function CampersList() {
         <button
           className={css.loadMore}
           disabled={isLoading}
-          onClick={() =>
-            loadMore(/* filters ми вже передаємо у store, як ти реалізувала */)
-          }
+          onClick={() => loadMore()}
         >
           {isLoading ? "Loading..." : "Load more"}
         </button>

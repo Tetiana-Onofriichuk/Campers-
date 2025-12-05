@@ -1,13 +1,15 @@
-// utils/getFiltersFromParams.ts
-import type { CamperFilters, EquipmentKey } from "@/types/camper";
+import type { CamperFilters, EquipmentKey, VehicleForm } from "@/types/camper";
+import type { ReadonlyURLSearchParams } from "next/navigation";
 
 export function buildFiltersFromSearchParams(
-  sp: URLSearchParams
+  sp: ReadonlyURLSearchParams
 ): CamperFilters {
   const location = sp.get("location") ?? "";
 
   const formParam = sp.get("form");
-  const form = formParam ? (formParam as CamperFilters["form"]) : null;
+  const form: VehicleForm | null = formParam
+    ? (formParam as VehicleForm)
+    : null;
 
   const equipment = sp.getAll("equipment") as EquipmentKey[];
 

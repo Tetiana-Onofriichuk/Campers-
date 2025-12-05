@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "./global.css";
 import Loading from "./loading";
 import { Suspense } from "react";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";

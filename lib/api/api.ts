@@ -5,7 +5,7 @@ import type {
   CampersResponse,
   EquipmentKey,
 } from "@/types/camper";
-
+import axios from "axios";
 const DEFAULT_LIMIT = 4;
 
 function buildParams(page: number, limit: number, filters: CamperFilters) {
@@ -33,11 +33,26 @@ export async function fetchCampers(
 ): Promise<CampersResponse> {
   const params = buildParams(page, limit, filters);
 
-  const { data } = await axiosInstance.get<CampersResponse>("/campers", {
-    params,
-  });
+  try {
+    const { data } = await axiosInstance.get<CampersResponse>("/campers", {
+      params,
+    });
 
-  return data;
+    return data;
+  } catch (error: unknown) {
+    // 1) Якщо це 404 – повертаємо "порожню" відповідь замість падіння
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return {
+        items: [], // або campers: [] — підлаштуй під свою структуру
+        total: 0,
+        page,
+        limit,
+      } as CampersResponse;
+    }
+
+    // 2) Інші помилки — нехай летять далі
+    throw error;
+  }
 }
 
 export async function fetchCamperById(id: string): Promise<Camper> {

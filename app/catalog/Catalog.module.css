@@ -1,5 +1,5 @@
 .catalog {
-  padding: 40px 0 80px;
+  padding: 48px 0px 0px 64px;
 }
 
 .title {
@@ -10,7 +10,7 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 360px 1fr; /* фільтри + список */
+  grid-template-columns: 360px 1fr;
   gap: 24px;
   align-items: flex-start;
 }

@@ -1,0 +1,31 @@
+"use client";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
+type FavoritesState = {
+  favorites: string[];
+  toggleFavorite: (id: string) => void;
+  isFavorite: (id: string) => boolean;
+};
+
+export const useFavoritesStore = create<FavoritesState>()(
+  persist(
+    (set, get) => ({
+      favorites: [],
+      toggleFavorite: (id) =>
+        set((state) => {
+          const isFav = state.favorites.includes(id);
+
+          return {
+            favorites: isFav
+              ? state.favorites.filter((itemId) => itemId !== id)
+              : [...state.favorites, id],
+          };
+        }),
+      isFavorite: (id) => get().favorites.includes(id),
+    }),
+    {
+      name: "campers-favorites",
+    }
+  )
+);

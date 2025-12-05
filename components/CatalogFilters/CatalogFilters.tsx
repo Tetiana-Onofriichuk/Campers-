@@ -1,4 +1,3 @@
-// components/CatalogFilters/CatalogFilters.tsx
 "use client";
 
 import { FormEvent, useState } from "react";
@@ -11,29 +10,58 @@ export default function CatalogFilters() {
   const pathname = usePathname();
   const sp = useSearchParams();
 
-  // початкове значення беремо з URL, щоб все було синхронно
-  const [locationInput, setLocationInput] = useState(sp.get("location") ?? "");
+  // ЛОКАЛЬНИЙ СТАН ФІЛЬТРІВ
+  const [tempFilters, setTempFilters] = useState({
+    location: sp.get("location") ?? "",
+    equipment: sp.getAll("equipment") ?? [],
+    form: sp.get("form") ?? "",
+  });
 
-  const updateSearchParams = (next: URLSearchParams) => {
-    const href = `${pathname}${next.toString() ? "?" + next.toString() : ""}`;
-    router.push(href);
+  // ОНОВЛЕННЯ ВИБРАНОГО ФІЛЬТРА
+  const updateFilter = (name: string, value: string, multi: boolean) => {
+    setTempFilters((prev) => {
+      if (multi) {
+        const set = new Set(prev[name] as string[]);
+        set.has(value) ? set.delete(value) : set.add(value);
+        return { ...prev, [name]: Array.from(set) };
+      }
+
+      return { ...prev, [name]: prev[name] === value ? "" : value };
+    });
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  // НАТИСКАННЯ SEARCH → застосовуємо фільтри
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const next = new URLSearchParams(sp.toString());
+    const next = new URLSearchParams();
 
-    if (locationInput.trim()) {
-      next.set("location", locationInput.trim());
-    } else {
-      next.delete("location");
+    if (tempFilters.location.trim()) {
+      next.set("location", tempFilters.location.trim());
     }
 
-    // нові фільтри → завжди з першої сторінки
+    if (tempFilters.equipment.length > 0) {
+      tempFilters.equipment.forEach((eq) => next.append("equipment", eq));
+    }
+
+    if (tempFilters.form) {
+      next.set("form", tempFilters.form);
+    }
+
     next.delete("page");
 
-    updateSearchParams(next);
+    router.push(`${pathname}?${next.toString()}`);
+  };
+
+  // RESET → очищаємо фільтри і URL
+  const handleReset = () => {
+    setTempFilters({
+      location: "",
+      equipment: [],
+      form: "",
+    });
+
+    router.push(pathname); // очищення URL-параметрів
   };
 
   return (
@@ -42,14 +70,23 @@ export default function CatalogFilters() {
         {/* Location */}
         <div className={css.block}>
           <p className={css.label}>Location</p>
-          <div className={css.locationWrapper}>
-            {/* тут можна вставити іконку, якщо захочеш */}
+
+          <div
+            className={`${css.locationInputWrapper} ${tempFilters.location ? css.hasValue : ""}`}
+          >
+            <svg className={css.locationIcon} aria-hidden="true">
+              <use href="sprite.svg#icon-location" />
+            </svg>
+
             <input
+              name="location"
               className={css.locationInput}
               type="text"
               placeholder="Kyiv, Ukraine"
-              value={locationInput}
-              onChange={(e) => setLocationInput(e.target.value)}
+              value={tempFilters.location}
+              onChange={(e) =>
+                setTempFilters({ ...tempFilters, location: e.target.value })
+              }
             />
           </div>
         </div>
@@ -60,6 +97,7 @@ export default function CatalogFilters() {
         <div className={css.block}>
           <p className={css.sectionTitle}>Vehicle equipment</p>
           <div className={css.divider} />
+
           <ul className={css.chipsGrid}>
             <FilterItem
               name="equipment"
@@ -67,62 +105,86 @@ export default function CatalogFilters() {
               label="AC"
               multi
               variant="pill"
+              iconId="wind"
+              activeItems={tempFilters.equipment}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="equipment"
               value="kitchen"
               label="Kitchen"
               multi
               variant="pill"
+              iconId="kitchen"
+              activeItems={tempFilters.equipment}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="equipment"
               value="bathroom"
               label="Bathroom"
               multi
               variant="pill"
+              iconId="shower"
+              activeItems={tempFilters.equipment}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="equipment"
               value="TV"
               label="TV"
               multi
               variant="pill"
+              iconId="tv"
+              activeItems={tempFilters.equipment}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="equipment"
               value="radio"
               label="Radio"
               multi
               variant="pill"
+              iconId="radio"
+              activeItems={tempFilters.equipment}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="equipment"
               value="refrigerator"
               label="Refrigerator"
               multi
               variant="pill"
+              iconId="fridge"
+              activeItems={tempFilters.equipment}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="equipment"
               value="microwave"
               label="Microwave"
               multi
               variant="pill"
+              iconId="microwave"
+              activeItems={tempFilters.equipment}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="equipment"
               value="gas"
               label="Gas"
               multi
               variant="pill"
-            />
-            <FilterItem
-              name="equipment"
-              value="water"
-              label="Water"
-              multi
-              variant="pill"
+              iconId="gas"
+              activeItems={tempFilters.equipment}
+              onSelect={updateFilter}
             />
           </ul>
         </div>
@@ -131,31 +193,50 @@ export default function CatalogFilters() {
         <div className={css.block}>
           <p className={css.sectionTitle}>Vehicle type</p>
           <div className={css.divider} />
+
           <ul className={css.chipsGrid}>
             <FilterItem
               name="form"
               value="panelTruck"
               label="Van"
               variant="pill"
+              iconId="bi_grid-1x2"
+              activeItem={tempFilters.form}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="form"
               value="fullyIntegrated"
               label="Fully integrated"
               variant="pill"
+              iconId="bi_grid-3x3-gap"
+              activeItem={tempFilters.form}
+              onSelect={updateFilter}
             />
+
             <FilterItem
               name="form"
               value="alcove"
               label="Alcove"
               variant="pill"
+              iconId="bi_grid"
+              activeItem={tempFilters.form}
+              onSelect={updateFilter}
             />
           </ul>
         </div>
 
-        <button type="submit" className={css.searchBtn}>
-          Search
-        </button>
+        {/* ACTION BUTTONS */}
+        <div className={css.actions}>
+          <button type="submit" className={css.searchBtn}>
+            Search
+          </button>
+
+          <button type="button" className={css.resetBtn} onClick={handleReset}>
+            Reset
+          </button>
+        </div>
       </form>
     </aside>
   );
