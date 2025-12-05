@@ -5,6 +5,8 @@ TravelTrucks is a modern, responsive web application for browsing and booking ca
 This platform is developed with a clean UI, smooth UX interactions, and an optimized architecture following best practices of Next.js and React.
 
 ✨ Key Features
+
+
 🔎 Camper Catalog
 
 Fetches and displays a list of available campers.
