@@ -13,9 +13,8 @@ type FilterItemProps = {
   hideInput?: boolean;
   variant?: "default" | "pill";
 
-  // нове – керування ззовні
-  activeItems?: string[]; // для multi = true (equipment)
-  activeItem?: string; // для single (form)
+  activeItems?: string[];
+  activeItem?: string;
   onSelect?: (name: FilterName, value: string, multi: boolean) => void;
 };
 

@@ -1,0 +1,65 @@
+.box {
+  background-color: var(--inputs);
+  border-radius: 10px;
+  padding: 44px 52px;
+  max-width: 631px;
+  max-height: 588px;
+}
+
+.featuresBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 100px;
+  padding: 0;
+  list-style: none;
+}
+
+.badge {
+  padding: 8px 14px;
+  border-radius: 100px;
+  background-color: var(--badges);
+  color: var(--main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.badgeIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.detailsTitle {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--main);
+  margin-bottom: 24px;
+}
+
+.detailsList {
+  list-style: none;
+  padding: 24px 0 0;
+
+  border-top: 1px solid var(--gray-light);
+}
+
+.detailsItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--main);
+}

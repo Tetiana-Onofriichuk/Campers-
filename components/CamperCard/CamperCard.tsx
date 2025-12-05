@@ -41,17 +41,16 @@ export default function CamperCard({ camper }: Props) {
   const { toggleFavorite, isFavorite } = useFavoritesStore();
   const favorite = isFavorite(String(id));
 
-  // 👇 Масив для бейджів з іконками
   const featureBadges = [
     transmission && {
       id: "transmission",
       label: capitalize(transmission),
-      iconId: "icon-bi_grid-1x2", // коробка передач
+      iconId: "icon-bi_grid-1x2",
     },
     engine && {
       id: "engine",
       label: capitalize(engine),
-      iconId: "icon-fuel-pump", // двигун / паливо
+      iconId: "icon-fuel-pump",
     },
     kitchen && {
       id: "kitchen",
@@ -96,13 +95,12 @@ export default function CamperCard({ camper }: Props) {
     water && {
       id: "water",
       label: "Water",
-      iconId: "icon-diagram", // або інший, якщо захочеш
+      iconId: "icon-diagram",
     },
   ].filter(Boolean) as { id: string; label: string; iconId: string }[];
 
   return (
     <article className={css.card}>
-      {/* Зображення */}
       <div className={css.imageWrapper}>
         <Image
           src={mainImage}
@@ -113,9 +111,7 @@ export default function CamperCard({ camper }: Props) {
         />
       </div>
 
-      {/* Контент */}
       <div className={css.content}>
-        {/* Верхній рядок: назва + ціна + сердечко */}
         <div className={css.headerRow}>
           <h2 className={css.title}>{name}</h2>
 
@@ -144,7 +140,6 @@ export default function CamperCard({ camper }: Props) {
           </div>
         </div>
 
-        {/* Рейтинг + локація */}
         <div className={css.metaRow}>
           <span className={css.rating}>
             <svg className={css.starIcon} aria-hidden="true">
@@ -164,10 +159,8 @@ export default function CamperCard({ camper }: Props) {
           </span>
         </div>
 
-        {/* Опис */}
         <p className={css.description}>{description}</p>
 
-        {/* Бейджі з характеристиками */}
         <ul className={css.badges}>
           {featureBadges.map((badge) => (
             <li key={badge.id} className={css.badge}>
@@ -179,7 +172,6 @@ export default function CamperCard({ camper }: Props) {
           ))}
         </ul>
 
-        {/* Кнопка Show more */}
         <div className={css.containerBtn}>
           <Link href={`/catalog/${id}`} className={css.showMore}>
             Show more

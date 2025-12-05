@@ -1,0 +1,143 @@
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: var(--main);
+  margin-bottom: 8px;
+  margin-top: 48px;
+}
+
+.metaRow {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--main);
+}
+
+.ratingText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--main);
+  border-bottom: 1px solid currentColor;
+}
+.starIcon {
+  width: 15px;
+  height: 14px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.locationIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--main);
+}
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: var(--main);
+  margin-bottom: 28px;
+}
+
+.gallery {
+  display: flex;
+  gap: 48px;
+
+  margin-bottom: 28px;
+}
+
+.galleryItem {
+  position: relative;
+  width: 292px;
+  height: 312px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex: 0 0 292px;
+  max-width: 292px;
+}
+
+.galleryImg {
+  object-fit: cover;
+  object-position: center;
+
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.descriptionTop {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--text);
+  margin-bottom: 60px;
+}
+
+.tabs {
+  display: flex;
+  gap: 40px;
+  border-bottom: 1px solid #dadde1;
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+.tabBtn {
+  position: relative;
+  padding: 14px 0 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 16px;
+  line-height: 1.5;
+  color: #475467;
+}
+
+.tabBtn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 4px;
+  background-color: transparent;
+  border-radius: 999px 999px 0 0;
+  transition:
+    width 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.tabBtnActive {
+  color: #101828;
+  font-weight: 600;
+}
+
+.tabBtnActive::after {
+  width: 100%;
+  background-color: #e44848;
+}
+
+.contentRow {
+  display: flex;
+  gap: 40px;
+}

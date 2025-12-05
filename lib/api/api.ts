@@ -40,22 +40,25 @@ export async function fetchCampers(
 
     return data;
   } catch (error: unknown) {
-    // 1) Якщо це 404 – повертаємо "порожню" відповідь замість падіння
     if (axios.isAxiosError(error) && error.response?.status === 404) {
       return {
-        items: [], // або campers: [] — підлаштуй під свою структуру
+        items: [],
         total: 0,
         page,
         limit,
       } as CampersResponse;
     }
 
-    // 2) Інші помилки — нехай летять далі
     throw error;
   }
 }
 
 export async function fetchCamperById(id: string): Promise<Camper> {
   const { data } = await axiosInstance.get<Camper>(`/campers/${id}`);
+  return data;
+}
+
+export async function getCamperById(id: string): Promise<Camper> {
+  const { data } = await axiosInstance.get(`/campers/${id}`);
   return data;
 }

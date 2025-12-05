@@ -5,6 +5,7 @@ import Loading from "./loading";
 import { Suspense } from "react";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   variable: "--font-family",
@@ -37,6 +38,18 @@ export default function RootLayout({
             <Suspense fallback={<Loading />}>
               <Header />
               {children}
+              <Toaster
+                position="top-center"
+                reverseOrder={false}
+                toastOptions={{
+                  style: {
+                    borderRadius: "8px",
+                    padding: "12px 16px",
+                    fontSize: "16px",
+                  },
+                  duration: 5000,
+                }}
+              />
             </Suspense>
           </div>
         </TanStackProvider>

@@ -10,14 +10,12 @@ export default function CatalogFilters() {
   const pathname = usePathname();
   const sp = useSearchParams();
 
-  // ЛОКАЛЬНИЙ СТАН ФІЛЬТРІВ
   const [tempFilters, setTempFilters] = useState({
     location: sp.get("location") ?? "",
     equipment: sp.getAll("equipment") ?? [],
     form: sp.get("form") ?? "",
   });
 
-  // ОНОВЛЕННЯ ВИБРАНОГО ФІЛЬТРА
   const updateFilter = (name: string, value: string, multi: boolean) => {
     setTempFilters((prev) => {
       if (multi) {
@@ -30,7 +28,6 @@ export default function CatalogFilters() {
     });
   };
 
-  // НАТИСКАННЯ SEARCH → застосовуємо фільтри
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -53,7 +50,6 @@ export default function CatalogFilters() {
     router.push(`${pathname}?${next.toString()}`);
   };
 
-  // RESET → очищаємо фільтри і URL
   const handleReset = () => {
     setTempFilters({
       location: "",
@@ -61,13 +57,12 @@ export default function CatalogFilters() {
       form: "",
     });
 
-    router.push(pathname); // очищення URL-параметрів
+    router.push(pathname);
   };
 
   return (
     <aside className={css.filters}>
       <form onSubmit={handleSubmit} className={css.form}>
-        {/* Location */}
         <div className={css.block}>
           <p className={css.label}>Location</p>
 
@@ -93,7 +88,6 @@ export default function CatalogFilters() {
 
         <p className={css.sectionCaption}>Filters</p>
 
-        {/* Vehicle equipment */}
         <div className={css.block}>
           <p className={css.sectionTitle}>Vehicle equipment</p>
           <div className={css.divider} />
@@ -189,7 +183,6 @@ export default function CatalogFilters() {
           </ul>
         </div>
 
-        {/* Vehicle type */}
         <div className={css.block}>
           <p className={css.sectionTitle}>Vehicle type</p>
           <div className={css.divider} />
@@ -227,7 +220,6 @@ export default function CatalogFilters() {
           </ul>
         </div>
 
-        {/* ACTION BUTTONS */}
         <div className={css.actions}>
           <button type="submit" className={css.searchBtn}>
             Search

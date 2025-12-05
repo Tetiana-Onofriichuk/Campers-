@@ -1,12 +1,14 @@
-import { getCamperById } from "@/lib/api/campersApi";
-import CamperPage from "@/components/CamperPage/CamperPage";
+// app/catalog/[id]/page.tsx
+import { getCamperById } from "@/lib/api/api";
+import CamperDetails from "@/components/CamperDetails/CamperDetails";
+import type { Camper } from "@/types/camper";
 
 type Props = {
   params: { id: string };
 };
 
 export default async function CamperDetailsPage({ params }: Props) {
-  const camper = await getCamperById(params.id);
+  const camper: Camper = await getCamperById(params.id);
 
-  return <CamperPage camper={camper} />;
+  return <CamperDetails camper={camper} />;
 }

@@ -1,6 +1,5 @@
 .hero {
   position: relative;
-  /* width: 100%; */
   min-height: 696px;
   background-image: url("/image/hero.webp");
   background-size: cover;
