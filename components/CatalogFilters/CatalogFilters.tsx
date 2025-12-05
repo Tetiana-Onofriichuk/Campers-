@@ -5,22 +5,35 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilterItem from "@/components/Filters/FilterItem";
 import css from "./CatalogFilters.module.css";
 
+type Filters = {
+  location: string;
+  equipment: string[];
+  form: string;
+};
+
 export default function CatalogFilters() {
   const router = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();
 
-  const [tempFilters, setTempFilters] = useState({
+  const [tempFilters, setTempFilters] = useState<Filters>({
     location: sp.get("location") ?? "",
     equipment: sp.getAll("equipment") ?? [],
     form: sp.get("form") ?? "",
   });
 
-  const updateFilter = (name: string, value: string, multi: boolean) => {
+  const updateFilter = (name: keyof Filters, value: string, multi: boolean) => {
     setTempFilters((prev) => {
       if (multi) {
-        const set = new Set(prev[name] as string[]);
-        set.has(value) ? set.delete(value) : set.add(value);
+        const current = prev[name] as string[];
+        const set = new Set(current);
+
+        if (set.has(value)) {
+          set.delete(value);
+        } else {
+          set.add(value);
+        }
+
         return { ...prev, [name]: Array.from(set) };
       }
 
@@ -46,7 +59,6 @@ export default function CatalogFilters() {
     }
 
     next.delete("page");
-
     router.push(`${pathname}?${next.toString()}`);
   };
 
@@ -67,7 +79,9 @@ export default function CatalogFilters() {
           <p className={css.label}>Location</p>
 
           <div
-            className={`${css.locationInputWrapper} ${tempFilters.location ? css.hasValue : ""}`}
+            className={`${css.locationInputWrapper} ${
+              tempFilters.location ? css.hasValue : ""
+            }`}
           >
             <svg className={css.locationIcon} aria-hidden="true">
               <use href="sprite.svg#icon-location" />
@@ -93,93 +107,44 @@ export default function CatalogFilters() {
           <div className={css.divider} />
 
           <ul className={css.chipsGrid}>
-            <FilterItem
-              name="equipment"
-              value="AC"
-              label="AC"
-              multi
-              variant="pill"
-              iconId="wind"
-              activeItems={tempFilters.equipment}
-              onSelect={updateFilter}
-            />
-
-            <FilterItem
-              name="equipment"
-              value="kitchen"
-              label="Kitchen"
-              multi
-              variant="pill"
-              iconId="kitchen"
-              activeItems={tempFilters.equipment}
-              onSelect={updateFilter}
-            />
-
-            <FilterItem
-              name="equipment"
-              value="bathroom"
-              label="Bathroom"
-              multi
-              variant="pill"
-              iconId="shower"
-              activeItems={tempFilters.equipment}
-              onSelect={updateFilter}
-            />
-
-            <FilterItem
-              name="equipment"
-              value="TV"
-              label="TV"
-              multi
-              variant="pill"
-              iconId="tv"
-              activeItems={tempFilters.equipment}
-              onSelect={updateFilter}
-            />
-
-            <FilterItem
-              name="equipment"
-              value="radio"
-              label="Radio"
-              multi
-              variant="pill"
-              iconId="radio"
-              activeItems={tempFilters.equipment}
-              onSelect={updateFilter}
-            />
-
-            <FilterItem
-              name="equipment"
-              value="refrigerator"
-              label="Refrigerator"
-              multi
-              variant="pill"
-              iconId="fridge"
-              activeItems={tempFilters.equipment}
-              onSelect={updateFilter}
-            />
-
-            <FilterItem
-              name="equipment"
-              value="microwave"
-              label="Microwave"
-              multi
-              variant="pill"
-              iconId="microwave"
-              activeItems={tempFilters.equipment}
-              onSelect={updateFilter}
-            />
-
-            <FilterItem
-              name="equipment"
-              value="gas"
-              label="Gas"
-              multi
-              variant="pill"
-              iconId="gas"
-              activeItems={tempFilters.equipment}
-              onSelect={updateFilter}
-            />
+            {[
+              "AC",
+              "kitchen",
+              "bathroom",
+              "TV",
+              "radio",
+              "refrigerator",
+              "microwave",
+              "gas",
+            ].map((eq) => (
+              <FilterItem
+                key={eq}
+                name="equipment"
+                value={eq}
+                label={eq[0].toUpperCase() + eq.slice(1)}
+                multi
+                variant="pill"
+                iconId={
+                  eq === "AC"
+                    ? "wind"
+                    : eq === "kitchen"
+                      ? "kitchen"
+                      : eq === "bathroom"
+                        ? "shower"
+                        : eq === "TV"
+                          ? "tv"
+                          : eq === "radio"
+                            ? "radio"
+                            : eq === "refrigerator"
+                              ? "fridge"
+                              : eq === "microwave"
+                                ? "microwave"
+                                : "gas"
+                }
+                activeItems={tempFilters.equipment}
+                onSelect={updateFilter}
+              />
+            ))}
           </ul>
         </div>
 

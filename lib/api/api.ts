@@ -6,10 +6,11 @@ import type {
   EquipmentKey,
 } from "@/types/camper";
 import axios from "axios";
+
 const DEFAULT_LIMIT = 4;
 
 function buildParams(page: number, limit: number, filters: CamperFilters) {
-  const params: Record<string, any> = { page, limit };
+  const params: Record<string, string | number | boolean> = { page, limit };
 
   if (filters.location.trim()) {
     params.location = filters.location.trim();
@@ -59,6 +60,6 @@ export async function fetchCamperById(id: string): Promise<Camper> {
 }
 
 export async function getCamperById(id: string): Promise<Camper> {
-  const { data } = await axiosInstance.get(`/campers/${id}`);
+  const { data } = await axiosInstance.get<Camper>(`/campers/${id}`);
   return data;
 }

@@ -31,6 +31,7 @@ export default function CamperDetails({ camper }: Props) {
     gallery?.[0]?.original || gallery?.[0]?.thumb || "/image/hero.webp";
 
   const reviewsCount = camper.reviews?.length ?? 0;
+
   return (
     <div className="container">
       <div className={css.headerContainer}>
@@ -46,6 +47,7 @@ export default function CamperDetails({ camper }: Props) {
               {rating.toFixed(1)} ({reviewsCount} reviews)
             </span>
           </span>
+
           <span className={css.location}>
             <svg className={css.locationIcon} aria-hidden="true">
               <use href="sprite.svg#icon-location" />
@@ -83,6 +85,7 @@ export default function CamperDetails({ camper }: Props) {
         >
           Features
         </button>
+
         <button
           type="button"
           className={`${css.tabBtn} ${
@@ -99,7 +102,7 @@ export default function CamperDetails({ camper }: Props) {
           {activeTab === "features" ? (
             <Description camper={camper} />
           ) : (
-            <Reviews reviews={reviews} rating={rating} />
+            <Reviews reviews={reviews} />
           )}
         </div>
 
