@@ -1,6 +1,6 @@
 "use client";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from "formik";
 import * as Yup from "yup";
 import css from "./BookingForm.module.css";
 import DatePickerField from "./DatePickerField";
@@ -33,7 +33,10 @@ const validationSchema = Yup.object({
 });
 
 export default function BookingForm() {
-  const handleSubmit = (values: BookingFormValues, { resetForm }: any) => {
+  const handleSubmit = (
+    values: BookingFormValues,
+    { resetForm }: FormikHelpers<BookingFormValues>
+  ) => {
     console.log("Booking form:", values);
 
     toast.success(
@@ -50,7 +53,7 @@ export default function BookingForm() {
         Stay connected! We are always ready to help you.
       </p>
 
-      <Formik
+      <Formik<BookingFormValues>
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -91,7 +94,6 @@ export default function BookingForm() {
 
             <DatePickerField name="bookingDate" />
 
-            {/* Comment */}
             <label className={css.field}>
               <Field
                 as="textarea"

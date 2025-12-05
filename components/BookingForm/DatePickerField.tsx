@@ -6,12 +6,19 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./BookingForm.module.css";
 
-type Props = {
+type BookingFormValues = {
   name: string;
+  email: string;
+  bookingDate: string;
+  comment: string;
+};
+
+type Props = {
+  name: keyof BookingFormValues; // можна й просто string, але так безпечніше
 };
 
 export default function DatePickerField({ name }: Props) {
-  const { setFieldValue } = useFormikContext<any>();
+  const { setFieldValue } = useFormikContext<BookingFormValues>();
   const [field, meta] = useField<string>(name);
 
   const selectedDate = field.value ? new Date(field.value) : null;

@@ -8,10 +8,9 @@ export type CamperReview = {
 
 type Props = {
   reviews: CamperReview[];
-  rating: number;
 };
 
-export default function Reviews({ reviews, rating }: Props) {
+export default function Reviews({ reviews }: Props) {
   if (!reviews?.length) {
     return <p className={css.noReviews}>There are no reviews yet.</p>;
   }
