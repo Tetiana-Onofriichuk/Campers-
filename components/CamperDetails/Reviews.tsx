@@ -37,7 +37,7 @@ export default function Reviews({ reviews }: Props) {
                         i < rev.reviewer_rating ? css.starActive : ""
                       }`}
                     >
-                      <use href="sprite.svg#icon-rating" />
+                      <use href="/sprite.svg#icon-rating" />
                     </svg>
                   ))}
                 </div>

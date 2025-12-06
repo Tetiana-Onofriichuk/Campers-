@@ -134,7 +134,7 @@ export default function CamperCard({ camper }: Props) {
               }
             >
               <svg className={css.favoriteIcon} aria-hidden="true">
-                <use href="sprite.svg#icon-heart" />
+                <use href="/sprite.svg#icon-heart" />
               </svg>
             </button>
           </div>
@@ -143,7 +143,7 @@ export default function CamperCard({ camper }: Props) {
         <div className={css.metaRow}>
           <span className={css.rating}>
             <svg className={css.starIcon} aria-hidden="true">
-              <use href="sprite.svg#icon-rating" />
+              <use href="/sprite.svg#icon-rating" />
             </svg>
             {rating.toFixed(1)}{" "}
             {reviewsCount > 0 && (
@@ -153,7 +153,7 @@ export default function CamperCard({ camper }: Props) {
 
           <span className={css.location}>
             <svg className={css.locationIcon} aria-hidden="true">
-              <use href="sprite.svg#icon-location" />
+              <use href="/sprite.svg#icon-location" />
             </svg>
             {location}
           </span>
@@ -165,7 +165,7 @@ export default function CamperCard({ camper }: Props) {
           {featureBadges.map((badge) => (
             <li key={badge.id} className={css.badge}>
               <svg className={css.badgeIcon} aria-hidden="true">
-                <use href={`sprite.svg#${badge.iconId}`} />
+                <use href={`/sprite.svg#${badge.iconId}`} />
               </svg>
               <span>{badge.label}</span>
             </li>

@@ -46,9 +46,7 @@
   width: 32px;
   height: 32px;
   display: block;
-  color: currentColor;
-  stroke: currentColor;
-  fill: none;
+  fill: currentColor;
 }
 
 .text {
