@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./global.css";
 import { Suspense } from "react";
+import ScrollUp from "@/components/ScrollUp/ScrollUp";
 
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
@@ -41,6 +42,7 @@ export default function RootLayout({
               <Header />
 
               <Suspense fallback={<Loading />}>{children}</Suspense>
+              <ScrollUp />
 
               <Toaster
                 position="top-center"
