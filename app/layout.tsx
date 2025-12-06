@@ -7,7 +7,7 @@ import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
 import { Toaster } from "react-hot-toast";
 import { MantineProvider } from "@mantine/core";
-import Loading from "./loader";
+import Loading from "./loading";
 
 const inter = Inter({
   variable: "--font-family",
@@ -40,7 +40,6 @@ export default function RootLayout({
             <div className="layout">
               <Header />
 
-              {/* Лоадер показується, коли щось усередині children “suspends” */}
               <Suspense fallback={<Loading />}>{children}</Suspense>
 
               <Toaster
