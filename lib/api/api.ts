@@ -54,12 +54,15 @@ export async function fetchCampers(
   }
 }
 
-export async function fetchCamperById(id: string): Promise<Camper> {
-  const { data } = await axiosInstance.get<Camper>(`/campers/${id}`);
-  return data;
-}
+export async function getCamperById(id: string): Promise<Camper | null> {
+  try {
+    const { data } = await axiosInstance.get<Camper>(`/campers/${id}`);
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
 
-export async function getCamperById(id: string): Promise<Camper> {
-  const { data } = await axiosInstance.get<Camper>(`/campers/${id}`);
-  return data;
+    throw error;
+  }
 }
