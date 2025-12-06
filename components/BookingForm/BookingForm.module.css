@@ -46,12 +46,26 @@
     border-color 0.2s ease,
     background-color 0.2s ease;
 }
+.input:placeholder-shown {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray);
+  font-family: var(--font-family);
+}
 .textarea {
   background: var(--inputs);
   border: 1px solid transparent;
   border-radius: 12px;
   padding: 18px;
   margin-bottom: 24px;
+}
+.textarea:placeholder-shown {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray);
 }
 
 .inputError {

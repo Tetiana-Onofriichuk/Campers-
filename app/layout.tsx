@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./global.css";
-import Loading from "./loading";
 import { Suspense } from "react";
+
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
 import { Toaster } from "react-hot-toast";
+import { MantineProvider } from "@mantine/core";
+import Loading from "./loader";
 
 const inter = Inter({
   variable: "--font-family",
@@ -33,11 +35,14 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className={`${inter.variable} antialiased`}>
-        <TanStackProvider>
-          <div className="layout">
-            <Suspense fallback={<Loading />}>
+        <MantineProvider defaultColorScheme="light">
+          <TanStackProvider>
+            <div className="layout">
               <Header />
-              {children}
+
+              {/* Лоадер показується, коли щось усередині children “suspends” */}
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+
               <Toaster
                 position="top-center"
                 reverseOrder={false}
@@ -50,9 +55,9 @@ export default function RootLayout({
                   duration: 5000,
                 }}
               />
-            </Suspense>
-          </div>
-        </TanStackProvider>
+            </div>
+          </TanStackProvider>
+        </MantineProvider>
       </body>
     </html>
   );
