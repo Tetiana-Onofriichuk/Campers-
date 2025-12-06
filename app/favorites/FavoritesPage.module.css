@@ -1,0 +1,35 @@
+.page {
+  padding: 40px 0 80px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1312px; /* як у каталогу, якщо є */
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.title {
+  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #101828;
+}
+
+.empty {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #667085;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.item {
+  list-style: none;
+}
