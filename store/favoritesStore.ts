@@ -1,28 +1,29 @@
-"use client";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { Camper } from "@/types/camper";
 
 type FavoritesState = {
-  favorites: string[];
-  toggleFavorite: (id: string) => void;
-  isFavorite: (id: string) => boolean;
+  favorites: Camper[];
+  toggleFavorite: (camper: Camper) => void;
+  isFavorite: (id: string | number) => boolean;
 };
 
 export const useFavoritesStore = create<FavoritesState>()(
   persist(
     (set, get) => ({
       favorites: [],
-      toggleFavorite: (id) =>
-        set((state) => {
-          const isFav = state.favorites.includes(id);
+      toggleFavorite: (camper) => {
+        const { favorites } = get();
+        const exists = favorites.some((item) => item.id === camper.id);
 
-          return {
-            favorites: isFav
-              ? state.favorites.filter((itemId) => itemId !== id)
-              : [...state.favorites, id],
-          };
-        }),
-      isFavorite: (id) => get().favorites.includes(id),
+        set({
+          favorites: exists
+            ? favorites.filter((item) => item.id !== camper.id)
+            : [...favorites, camper],
+        });
+      },
+      isFavorite: (id) =>
+        get().favorites.some((item) => String(item.id) === String(id)),
     }),
     {
       name: "campers-favorites",

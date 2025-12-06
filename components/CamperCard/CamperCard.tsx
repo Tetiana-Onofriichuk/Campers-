@@ -38,6 +38,7 @@ export default function CamperCard({ camper }: Props) {
   const priceFormatted = `${price}.00`;
   const reviewsCount = camper.reviews?.length ?? 0;
 
+  // FAVORITES STORE
   const { toggleFavorite, isFavorite } = useFavoritesStore();
   const favorite = isFavorite(String(id));
 
@@ -125,7 +126,7 @@ export default function CamperCard({ camper }: Props) {
               }`}
               onClick={(e) => {
                 e.stopPropagation();
-                toggleFavorite(String(id));
+                toggleFavorite(camper); // <-- ВАЖЛИВО!
               }}
               aria-label={
                 favorite
