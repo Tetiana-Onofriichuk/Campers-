@@ -13,6 +13,7 @@ import Loading from "./loading";
 const inter = Inter({
   variable: "--font-family",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
