@@ -27,10 +27,14 @@
 
 .headerRow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
   gap: 16px;
+}
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: var(--main);
 }
 
 .favoriteBtn {
@@ -52,13 +56,6 @@
   color: var(--button);
 }
 
-.title {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 133%;
-  color: var(--main);
-}
-
 .price {
   font-weight: 600;
   font-size: 24px;
@@ -67,7 +64,10 @@
 }
 .priceWrapper {
   display: flex;
+  text-align: center;
   gap: 12px;
+  min-width: 170px;
+  margin-left: auto;
 }
 
 .metaRow {
@@ -162,8 +162,39 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  margin-right: 24px;
 }
 
 .showMore:hover {
   background-color: var(--button-hover);
+}
+
+.bookNowBtn {
+  display: inline-block;
+  border-radius: 200px;
+  padding: 16px 40px;
+  border: 1px solid var(--gray-light);
+
+  background-color: var(--white);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+  text-align: center;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.loadMore:hover,
+.loadMore:focus {
+  background-color: var(--gray-light);
+  color: var(--main);
+}
+
+.loadMore:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: transparent;
 }
