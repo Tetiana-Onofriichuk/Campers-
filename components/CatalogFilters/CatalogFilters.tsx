@@ -91,7 +91,7 @@ export default function CatalogFilters() {
               name="location"
               className={css.locationInput}
               type="text"
-              placeholder="Kyiv, Ukraine"
+              placeholder="City"
               value={tempFilters.location}
               onChange={(e) =>
                 setTempFilters({ ...tempFilters, location: e.target.value })
