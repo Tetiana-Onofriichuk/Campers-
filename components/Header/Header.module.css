@@ -27,9 +27,11 @@
 }
 
 .navigationLink:hover,
-.navigationLink:focus,
-.navigationLink:active {
+.navigationLink:focus {
   color: var(--button-hover);
+}
+.active {
+  color: #e44848;
 }
 .favoritesLink {
   position: relative;

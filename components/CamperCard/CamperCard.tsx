@@ -37,7 +37,7 @@ export default function CamperCard({ camper }: Props) {
   const mainImage =
     gallery?.[0]?.thumb || gallery?.[0]?.original || "/image/hero.webp";
 
-  const priceFormatted = `${price}.00`;
+  const priceFormatted = Number(price).toFixed(2);
   const reviewsCount = camper.reviews?.length ?? 0;
 
   const { toggleFavorite, isFavorite } = useFavoritesStore();
