@@ -1,11 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import css from "./Header.module.css";
 import { useFavoritesStore } from "@/store/favoritesStore";
 
 export default function Header() {
   const favorites = useFavoritesStore((state) => state.favorites);
+  const pathname = usePathname();
+
+  const isHome = pathname === "/";
+  const isCatalog = pathname.startsWith("/catalog");
 
   return (
     <header className={css.header}>
@@ -19,12 +24,21 @@ export default function Header() {
 
           <ul className={css.navigationList}>
             <li>
-              <Link href="/" className={css.navigationLink}>
+              <Link
+                href="/"
+                className={`${css.navigationLink} ${isHome ? css.active : ""}`}
+              >
                 Home
               </Link>
             </li>
+
             <li>
-              <Link href="/catalog" className={css.navigationLink}>
+              <Link
+                href="/catalog"
+                className={`${css.navigationLink} ${
+                  isCatalog ? css.active : ""
+                }`}
+              >
                 Catalog
               </Link>
             </li>
