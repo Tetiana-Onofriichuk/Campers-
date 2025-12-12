@@ -21,10 +21,12 @@ export default function CatalogPage() {
   }, [filters, loadFirstPage]);
 
   return (
-    <main className={css.catalog}>
-      <div className={css.layout}>
-        <CatalogFilters />
-        <CampersList />
+    <main>
+      <div className="container">
+        <div className={css.layout}>
+          <CatalogFilters />
+          <CampersList />
+        </div>
       </div>
     </main>
   );
